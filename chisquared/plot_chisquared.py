@@ -65,7 +65,7 @@ def Plot(titlestr, X, outname, outdir, pColors,
     mpl.rcParams['ytick.direction'] = 'out'
     
     mpl.rc('font', **{'size': 10})
-    mpl.rc('legend', **{'fontsize': 6.0})
+    mpl.rc('legend', **{'fontsize': 7.0})
     mpl.rc("axes", linewidth = 0.5)
     
     # plt.rc('font', **{'family' : 'sans-serif', 'sans-serif' : ['Myriad Pro']})
@@ -81,8 +81,8 @@ def Plot(titlestr, X, outname, outdir, pColors,
     # set up figure
     fWidth, fHeight, lFrac, rFrac, bFrac, tFrac =\
         getFigureProps(width = 4.1, height = 2.9,
-                       lFrac = 0.18, rFrac = 0.95,
-                       bFrac = 0.18, tFrac = 0.95)
+                       lFrac = 0.18, rFrac = 0.98,
+                       bFrac = 0.16, tFrac = 0.96)
     f, ax1 = plt.subplots(1)
     f.set_size_inches(fWidth, fHeight)
     f.subplots_adjust(left = lFrac, right = rFrac)
@@ -114,7 +114,7 @@ def Plot(titlestr, X, outname, outdir, pColors,
     
     # plot test error
     ax1.plot(X[:, 0], X[:, 1],
-             color = pColors['blue'],
+             color = pColors[0],
              alpha = 1.0,
              lw = lineWidth,
              zorder = 11,
@@ -132,7 +132,9 @@ def Plot(titlestr, X, outname, outdir, pColors,
         leg.draw_frame(False)
         plt.gca().add_artist(leg)
         
-        
+        # set the linewidth of the legend object
+        for legobj in leg.legendHandles:
+            legobj.set_linewidth(1.5)
     
     ######################################################################################
     # set plot range
@@ -202,15 +204,27 @@ if __name__ == '__main__':
     
     # call the plotting function
     
-    outname = 'chiSquared_pdf_dof_1'
+
     
     xFormat = [-0.15, 4.9, 0.0, 7.61, 1.0, 0.5]
     yFormat = [-0.05, 2.25, 0.0, 2.26, 1.0, 0.5]
     
-    # plot color dictionary
-    pColors = {'blue': '#0000FF',   # standard blue
-               'red': '#FF0000'}    # standard red
+    pColors = ['#0000FF']   # standard blue
+    outname = 'chiSquared_pdf_dof_1' + '_color_blue'
     
+    outname = Plot(titlestr = '',
+                   X = X,
+                   outname = outname,
+                   outdir = OUTDIR,
+                   pColors = pColors,
+                   grid = False,
+                   drawLegend = True, 
+                   xFormat = xFormat,
+                   yFormat = yFormat)
+                   
+    outname = 'chiSquared_pdf_dof_1' + '_color_black'
+    
+    pColors = ['k']   # standard black
     outname = Plot(titlestr = '',
                    X = X,
                    outname = outname,
