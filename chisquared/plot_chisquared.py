@@ -3,7 +3,7 @@
 ##########################################################################################
 # author: Nikolas Schnellbaecher
 # contact: khx0@posteo.net
-# date: 2019-04-08
+# date: 2019-04-09
 # file: plot_chisquared.py
 # tested with python 2.7.15 in conjunction with mpl version 2.2.3
 # tested with python 3.7.2  in conjunction with mpl version 3.0.3
@@ -25,13 +25,6 @@ RAWDIR = os.path.join(BASEDIR, 'raw')
 OUTDIR = os.path.join(BASEDIR, 'out')
 
 os.makedirs(OUTDIR, exist_ok = True)
-
-def cleanFormatter(x, pos):
-    '''
-    will format 0.0 as 0 and
-    will format 1.0 as 1
-    '''
-    return '{:g}'.format(x)
 
 def getFigureProps(width, height, lFrac = 0.17, rFrac = 0.9, bFrac = 0.17, tFrac = 0.9):
     '''
@@ -95,7 +88,7 @@ def Plot(titlestr, X, outname, outdir, pColors,
     for tick in ax1.yaxis.get_major_ticks():
         tick.label.set_fontsize(labelfontsize)
 
-    ax1.tick_params('both', length = 1.5, width = 0.5, which = 'major', pad = 3.0)
+    ax1.tick_params('both', length = 2.0, width = 0.5, which = 'major', pad = 3.0)
     ax1.tick_params('both', length = 1.0, width = 0.25, which = 'minor', pad = 3.0)
 
     ax1.tick_params(axis = 'x', which = 'major', pad = 1.5)
@@ -125,7 +118,7 @@ def Plot(titlestr, X, outname, outdir, pColors,
     if drawLegend:
         leg = ax1.legend(# bbox_to_anchor = [0.7, 0.8],
                          # loc = 'upper left',
-                         handlelength = 1.5,
+                         handlelength = 1.80,
                          scatterpoints = 1,
                          markerscale = 1.0,
                          ncol = 1)
@@ -155,11 +148,6 @@ def Plot(titlestr, X, outname, outdir, pColors,
         ax1.set_yticks(major_y_ticks)
         ax1.set_yticks(minor_y_ticks, minor = True)
         ax1.set_ylim(yFormat[0], yFormat[1])
-
-    # tick label formatting
-    majorFormatter = FuncFormatter(cleanFormatter)
-    ax1.xaxis.set_major_formatter(majorFormatter)
-    ax1.yaxis.set_major_formatter(majorFormatter)
 
     ax1.set_axisbelow(False)
 
@@ -203,8 +191,6 @@ if __name__ == '__main__':
     X[:, 1] = yVals
 
     # call the plotting function
-
-
 
     xFormat = [-0.15, 4.9, 0.0, 7.61, 1.0, 0.5]
     yFormat = [-0.05, 2.25, 0.0, 2.26, 1.0, 0.5]
