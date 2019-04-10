@@ -230,3 +230,16 @@ if __name__ == '__main__':
                    drawLegend = True,
                    xFormat = xFormat,
                    yFormat = yFormat)
+                   
+    outname = 'chiSquared_pdf_dof_1' + '_color_C0'
+
+    pColors = ['C0'] # mpl default blue
+    outname = Plot(titlestr = '',
+                   X = X,
+                   outname = outname,
+                   outdir = OUTDIR,
+                   pColors = pColors,
+                   grid = False,
+                   drawLegend = True,
+                   xFormat = xFormat,
+                   yFormat = yFormat)
