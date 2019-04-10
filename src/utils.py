@@ -35,7 +35,7 @@ def checkPDFnorm(PDF, xGrid, textString = '', verbose = False):
         if (verbose):
             sys.exit(1)
     return norm
-                        
+
 if __name__ == '__main__':
 
     pass

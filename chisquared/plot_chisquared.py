@@ -89,7 +89,7 @@ def Plot(titlestr, X, outname, outdir, pColors,
         tick.label.set_fontsize(labelfontsize)
 
     ax1.tick_params('both', length = 2.0, width = 0.5, which = 'major', pad = 3.0)
-    ax1.tick_params('both', length = 1.0, width = 0.25, which = 'minor', pad = 3.0)
+    ax1.tick_params('both', length = 1.25, width = 0.25, which = 'minor', pad = 3.0)
 
     ax1.tick_params(axis = 'x', which = 'major', pad = 1.5)
     ax1.tick_params(axis = 'y', which = 'major', pad = 1.5, zorder = 10)
@@ -112,6 +112,16 @@ def Plot(titlestr, X, outname, outdir, pColors,
              lw = lineWidth,
              zorder = 11,
              label = r'$\chi^2_1(x)$')
+
+    ######################################################################################
+    # annotations
+    
+    ax1.annotate(r'$\chi_1^2(x) = \dfrac{1}{\sqrt{2\pi x}} e^{-x/2} $',
+                 xy = (0.45, 0.40),
+                 xycoords = 'axes fraction',
+                 fontsize = 7.0,
+                 horizontalalignment = 'left',
+                 zorder = 8)
 
     ######################################################################################
     # legend
