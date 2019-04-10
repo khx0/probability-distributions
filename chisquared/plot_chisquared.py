@@ -3,7 +3,7 @@
 ##########################################################################################
 # author: Nikolas Schnellbaecher
 # contact: khx0@posteo.net
-# date: 2019-04-09
+# date: 2019-04-10
 # file: plot_chisquared.py
 # tested with python 2.7.15 in conjunction with mpl version 2.2.3
 # tested with python 3.7.2  in conjunction with mpl version 3.0.3
@@ -115,7 +115,7 @@ def Plot(titlestr, X, outname, outdir, pColors,
 
     ######################################################################################
     # annotations
-    
+
     ax1.annotate(r'$\chi_1^2(x) = \dfrac{1}{\sqrt{2\pi x}} e^{-x/2} $',
                  xy = (0.45, 0.40),
                  xycoords = 'axes fraction',
@@ -205,7 +205,7 @@ if __name__ == '__main__':
     xFormat = [-0.15, 4.9, 0.0, 7.61, 1.0, 0.5]
     yFormat = [-0.05, 2.25, 0.0, 2.26, 1.0, 0.5]
 
-    pColors = ['#0000FF']   # standard blue
+    pColors = ['#0000FF'] # standard blue
     outname = 'chiSquared_pdf_dof_1' + '_color_blue'
 
     outname = Plot(titlestr = '',
@@ -220,7 +220,7 @@ if __name__ == '__main__':
 
     outname = 'chiSquared_pdf_dof_1' + '_color_black'
 
-    pColors = ['k']   # standard black
+    pColors = ['k'] # standard black
     outname = Plot(titlestr = '',
                    X = X,
                    outname = outname,
