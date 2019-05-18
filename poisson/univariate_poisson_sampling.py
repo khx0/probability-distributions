@@ -89,11 +89,11 @@ def Plot(titlestr, X, S, params, outname, outdir, pColors,
     for tick in ax1.yaxis.get_major_ticks():
         tick.label.set_fontsize(labelfontsize)
 
-    ax1.tick_params('both', length = 2.5, width = 0.5, which = 'major', pad = 3.0)
-    ax1.tick_params('both', length = 1.5, width = 0.25, which = 'minor', pad = 3.0)
+    ax1.tick_params('both', length = 2.0, width = 0.5, which = 'major', pad = 3.0)
+    ax1.tick_params('both', length = 1.0, width = 0.25, which = 'minor', pad = 3.0)
 
-    ax1.tick_params(axis = 'x', which = 'major', pad = 1.5)
-    ax1.tick_params(axis = 'y', which = 'major', pad = 1.5, zorder = 10)
+    ax1.tick_params(axis = 'x', which = 'major', pad = 1.0)
+    ax1.tick_params(axis = 'y', which = 'major', pad = 1.0, zorder = 10)
     ######################################################################################
     # labeling
     plt.title(titlestr)
@@ -113,7 +113,7 @@ def Plot(titlestr, X, S, params, outname, outdir, pColors,
              zorder = 2,
              dashes = [4.0, 2.0])
 
-    for i in range(len(muValues)):
+    for i in range(len(meanValues)):
 
         ax1.plot(X[:, 0], X[:, i + 1],
                  color =  pColors[i + 1],
@@ -121,7 +121,6 @@ def Plot(titlestr, X, S, params, outname, outdir, pColors,
                  lw = lineWidth,
                  zorder = 2,
                  label = r'')
-                 #drawstyle = 'steps-mid')
                     
         ax1.scatter(S[:, 0], S[:, i + 1],
                     s = 6.0,
@@ -233,8 +232,8 @@ def Plot(titlestr, X, S, params, outname, outdir, pColors,
     plt.close()
     return outname
 
-def sample(mu):
-    u = np.random.uniform()    
+def inverseTransformSampling(mu, nSamples):
+    u = np.random.uniform(size = nSamples)    
     x = poisson.ppf(u, mu)
     return x
 
@@ -243,22 +242,20 @@ if __name__ == '__main__':
     print("using np.__version__ =", np.__version__)
     print("using scipy.__version__ =", scipy.__version__)
 
-    nSamples = 5000 # 100 # 2000 # 1000 # 50000
+    nSamples = 50000 # 100 # 1000 # 2000 # 5000
 
     # create Poisson distributed random sample
-    muValues = [1.0, 5.0, 9.0]
+    meanValues = [1.0, 5.0, 9.0]
 
     nBins = 20
-    S = np.zeros((nBins, len(muValues) + 1))
+    S = np.zeros((nBins, len(meanValues) + 1))
     xVals = np.arange(0, 30, 1)
-    X = np.zeros((len(xVals), len(muValues) + 1))
+    X = np.zeros((len(xVals), len(meanValues) + 1))
     X[:, 0] = xVals
 
-    for i, mu in enumerate(muValues):
+    for i, mu in enumerate(meanValues):
 
-        samples = []
-        for cc in range(nSamples):
-            samples.append(sample(mu))
+        samples = inverseTransformSampling(mu, nSamples)
 
         # bin the data
         hist, bin_edges = np.histogram(samples, bins = nBins, range = (-0.5, 19.5),
